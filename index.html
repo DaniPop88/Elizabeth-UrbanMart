@@ -1,0 +1,933 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elizabeth Sagun Urban Mart | Quality Furniture & Home Essentials</title>
+    <meta name="description" content="Elizabeth Sagun Urban Mart: Trusted Filipino furniture and homeware store in Muntinlupa. Sulit, sturdy, stylish – browse our affordable catalog online.">
+    <link rel="icon" type="image/png" href="image/FAVICON.png">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:900,700,400|Roboto:400,500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --navy: #091c6e;
+            --magenta: #ff2380;
+            --gray: #f4f4f4;
+            --white: #fff;
+            --primary: var(--navy);
+            --accent: var(--magenta);
+            --body-bg: var(--gray);
+            --header-bg: var(--white);
+            --footer-bg: var(--primary);
+            --footer-text: var(--gray);
+            --text-main: #222c3c;
+            --shadow: 0 2px 8px rgba(60,60,60,0.07);
+            --max-width: 1200px;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            background: var(--body-bg);
+            font-family: 'Roboto', Arial, sans-serif;
+            color: var(--text-main);
+            line-height: 1.6;
+        }
+        header {
+            background: var(--header-bg);
+            box-shadow: var(--shadow);
+            padding: 0.5rem 0 0.3rem 0;
+            position: sticky;
+            top: 0;
+            width: 100%;
+            z-index: 999;
+            transition: box-shadow 0.2s;
+        }
+        .nav-container {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 1rem;
+            position: relative;
+        }
+        .logo-block {
+            display: flex;
+            align-items: center;
+        }
+        .logo-img {
+            height: 63px;
+            width: 63px;
+            margin-right: 1rem;
+            background: none;
+            border-radius: 10px;
+            box-shadow: none;
+            object-fit: contain;
+        }
+        .logo-texts {
+            display: flex;
+            flex-direction: column;
+        }
+        .logo-main {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 900;
+            font-size: 1.65rem;
+            color: var(--primary);
+            line-height: 1;
+        }
+        .logo-highlight {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 900;
+            font-size: 1.65rem;
+            color: var(--accent);
+            line-height: 1;
+        }
+        .logo-sub {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 400;
+            font-size: 1.1rem;
+            color: var(--primary);
+            letter-spacing: 1px;
+            margin-top: 2px;
+        }
+        nav {
+            display: flex;
+            gap: 1.2rem;
+            align-items: center;
+        }
+        nav a {
+            text-decoration: none;
+            color: var(--primary);
+            font-weight: 700;
+            font-size: 1rem;
+            font-family: 'Montserrat', sans-serif;
+            letter-spacing: 1px;
+            transition: color 0.2s;
+        }
+        nav a:hover {
+            color: var(--accent);
+        }
+        /* Burger button styling */
+        .burger {
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            width: 42px;
+            height: 42px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            margin-left: 1rem;
+        }
+        .burger span {
+            display: block;
+            width: 28px;
+            height: 4px;
+            background: var(--primary);
+            margin: 4px 0;
+            border-radius: 2px;
+            transition: all 0.3s;
+        }
+        .burger.active span:nth-child(1) {
+            transform: rotate(45deg) translate(6px, 6px);
+        }
+        .burger.active span:nth-child(2) {
+            opacity: 0;
+        }
+        .burger.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(6px, -6px);
+        }
+        /* Mobile navigation */
+        @media (max-width: 900px) {
+            nav {
+                position: absolute;
+                top: 100%;
+                right: 0;
+                background: var(--header-bg);
+                flex-direction: column;
+                align-items: flex-start;
+                width: 220px;
+                box-shadow: 0 4px 12px rgba(9,28,110,0.07);
+                padding: 1.2rem 1.5rem 1.2rem 1.3rem;
+                border-radius: 0 0 10px 10px;
+                gap: 1.5rem;
+                display: none;
+            }
+            nav.active {
+                display: flex;
+            }
+            .burger {
+                display: flex;
+            }
+        }
+        @media (max-width: 600px) {
+            .home-section h1 { font-size: 1.2rem; }
+            .section-title { font-size: 1.11rem; }
+            .about-section, .product-card, .testimonial-section, .faq-section, .contact-section, .delivery-section, .legitimacy-section {
+                padding: 1rem;
+            }
+            .product-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+            .logo-img {
+                height: 48px;
+                width: 48px;
+            }
+            .logo-main, .logo-highlight {
+                font-size: 1.05rem;
+            }
+            .logo-sub {
+                font-size: 0.88rem;
+            }
+        }
+        /* Floating cart button */
+        .floating-cart-btn {
+            position: fixed;
+            bottom: 28px;
+            right: 28px;
+            z-index: 1200;
+            background: var(--accent);
+            color: var(--white);
+            border: none;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            box-shadow: 0 4px 12px rgba(9,28,110,0.13);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .floating-cart-btn:hover {
+            background: var(--primary);
+            color: var(--accent);
+        }
+        .floating-cart-icon-img {
+            width: 32px;
+            height: 32px;
+        }
+        .floating-cart-count {
+            position: absolute;
+            top: 9px;
+            right: 13px;
+            background: var(--white);
+            color: var(--accent);
+            font-size: 0.85rem;
+            font-weight: bold;
+            border-radius: 50%;
+            padding: 2px 7px;
+            border: 2px solid var(--accent);
+            z-index: 2;
+        }
+        main {
+            max-width: var(--max-width);
+            margin: 2rem auto 0 auto;
+            padding: 0 1rem 2rem 1rem;
+        }
+        .home-section {
+            text-align: center;
+            margin-bottom: 2.5rem;
+        }
+        .home-section h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2.25rem;
+            color: var(--primary);
+            font-weight: 900;
+            letter-spacing: 1px;
+            margin-bottom: 0.35rem;
+        }
+        .home-section h2 {
+            font-size: 1.25rem;
+            color: var(--accent);
+            font-weight: 900;
+            margin-bottom: 1rem;
+            font-family: 'Montserrat', sans-serif;
+            letter-spacing: 1px;
+        }
+        .home-section p {
+            font-size: 1.08rem;
+            margin-bottom: 1.1rem;
+        }
+        .cta-btn {
+            display: inline-block;
+            background: var(--accent);
+            color: var(--white);
+            padding: 0.8rem 2.2rem;
+            border-radius: 2rem;
+            font-weight: 900;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.08rem;
+            margin-top: 0.8rem;
+            text-decoration: none;
+            letter-spacing: 1px;
+            box-shadow: var(--shadow);
+            border: none;
+            transition: background 0.2s, color 0.2s;
+        }
+        .cta-btn:hover {
+            background: var(--primary);
+            color: var(--accent);
+        }
+        .section-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.6rem;
+            color: var(--primary);
+            font-weight: 900;
+            margin-bottom: 1.25rem;
+            text-align: center;
+            margin-top: 2rem;
+            letter-spacing: 1px;
+        }
+        .about-section {
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+        .about-section ul {
+            margin: 1rem 0 1rem 1.5rem;
+        }
+        .about-section ul li {
+            margin-bottom: 0.5rem;
+            font-size: 1rem;
+        }
+        .product-section {
+            margin-bottom: 2.5rem;
+        }
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 1.5rem;
+        }
+        .product-card {
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            padding: 1.1rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            min-height: 340px;
+            border: 2px solid var(--gray);
+            transition: box-shadow 0.2s, border-color 0.2s;
+        }
+        .product-card:hover {
+            box-shadow: 0 4px 16px rgba(9,28,110,0.09);
+            border-color: var(--accent);
+        }
+        .product-card img {
+            width: 100%;
+            max-width: 140px;
+            height: 120px;
+            object-fit: contain;
+            border-radius: 7px;
+            background: #f6e8d1;
+            margin-bottom: 0.7rem;
+        }
+        .product-title {
+            font-weight: bold;
+            color: var(--primary);
+            font-size: 1.08rem;
+            margin-bottom: 0.5rem;
+            text-align: center;
+            font-family: 'Montserrat', sans-serif;
+        }
+        .product-desc {
+            font-size: 0.97rem;
+            color: #555;
+            margin-bottom: 0.6rem;
+            text-align: center;
+        }
+        .product-meta {
+            font-size: 0.9rem;
+            color: #444;
+            margin-bottom: 0.5rem;
+        }
+        .product-price {
+            color: var(--accent);
+            font-weight: bold;
+            font-size: 1.07rem;
+        }
+        .add-to-cart-btn {
+            background: var(--primary);
+            color: var(--white);
+            border: none;
+            padding: 0.55rem 1.4rem;
+            border-radius: 18px;
+            font-size: 0.97rem;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 900;
+            cursor: pointer;
+            margin-top: auto;
+            transition: background 0.2s, color 0.2s;
+            letter-spacing: 1px;
+        }
+        .add-to-cart-btn:hover {
+            background: var(--accent);
+            color: var(--primary);
+        }
+        .cart-section {
+            position: fixed;
+            right: 0;
+            top: 0;
+            width: 350px;
+            max-width: 93vw;
+            height: 100%;
+            background: #fff;
+            box-shadow: -2px 0 12px rgba(60,60,60,0.11);
+            transform: translateX(100%);
+            transition: transform 0.3s;
+            z-index: 1100;
+            padding: 2rem 1rem 1rem 1rem;
+            overflow-y: auto;
+        }
+        .cart-section.open {
+            transform: translateX(0);
+        }
+        .cart-section h3 {
+            font-size: 1.3rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 900;
+            letter-spacing: 1px;
+        }
+        .cart-items {
+            margin-bottom: 1rem;
+        }
+        .cart-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 0.6rem;
+        }
+        .cart-item img {
+            width: 52px;
+            height: 45px;
+            object-fit: contain;
+            border-radius: 4px;
+            margin-right: 0.8rem;
+        }
+        .cart-item-details {
+            flex: 1;
+        }
+        .cart-item-title {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--primary);
+            font-family: 'Montserrat', sans-serif;
+        }
+        .cart-item-qty {
+            font-size: 0.92rem;
+            color: #444;
+        }
+        .cart-item-price {
+            color: var(--accent);
+            font-weight: 500;
+            font-size: 0.98rem;
+        }
+        .remove-cart-btn {
+            background: none;
+            border: none;
+            color: #c0392b;
+            font-size: 1.1rem;
+            cursor: pointer;
+            margin-left: 0.5rem;
+        }
+        .cart-total {
+            font-weight: bold;
+            color: var(--primary);
+            font-size: 1.07rem;
+            margin-bottom: 1rem;
+            text-align: right;
+        }
+        .checkout-btn {
+            background: var(--accent);
+            color: #fff;
+            border: none;
+            padding: 0.6rem 1.8rem;
+            border-radius: 20px;
+            font-size: 1rem;
+            font-weight: 900;
+            cursor: pointer;
+            width: 100%;
+            font-family: 'Montserrat', sans-serif;
+            letter-spacing: 1px;
+            transition: background 0.2s, color 0.2s;
+        }
+        .checkout-btn:hover {
+            background: var(--primary);
+            color: var(--accent);
+        }
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(9,28,110,0.23);
+            z-index: 1099;
+        }
+        .overlay.active {
+            display: block;
+        }
+        .testimonial-section, .faq-section, .contact-section, .delivery-section, .legitimacy-section {
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            padding: 1.7rem;
+            margin-bottom: 2rem;
+        }
+        .testimonial-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        .testimonial {
+            font-style: italic;
+            color: #4f4f4f;
+            margin-bottom: 0.4rem;
+            font-size: 1.04rem;
+        }
+        .testimonial-author {
+            font-weight: 900;
+            color: var(--accent);
+            font-family: 'Montserrat', sans-serif;
+        }
+        .faq-list {
+            list-style: none;
+        }
+        .faq-list li {
+            margin-bottom: 1rem;
+        }
+        .faq-q {
+            font-weight: 900;
+            color: var(--primary);
+            margin-bottom: 0.2rem;
+            font-family: 'Montserrat', sans-serif;
+        }
+        .faq-a {
+            margin-left: 0.7rem;
+        }
+        .contact-details, .delivery-details, .legitimacy-details {
+            margin-top: 0.7rem;
+            font-size: 1.04rem;
+        }
+        .social-links a {
+            margin-right: 1.2rem;
+            color: var(--primary);
+            font-weight: 700;
+            text-decoration: none;
+            font-size: 1rem;
+            font-family: 'Montserrat', sans-serif;
+            letter-spacing: 1px;
+            transition: color 0.2s;
+        }
+        .social-links a:hover {
+            color: var(--accent);
+        }
+        footer {
+            background: var(--footer-bg);
+            color: var(--footer-text);
+            padding: 2rem 0 1rem 0;
+            text-align: center;
+        }
+        .footer-links {
+            margin-bottom: 1rem;
+        }
+        .footer-links a {
+            color: var(--accent);
+            text-decoration: underline;
+            margin: 0 0.9rem;
+            font-size: 1rem;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            transition: color 0.2s;
+        }
+        .footer-links a:hover {
+            color: #fff;
+        }
+        .footer-address {
+            font-size: 1.02rem;
+            margin-bottom: 0.3rem;
+        }
+        .footer-contact {
+            font-size: 1.02rem;
+            margin-bottom: 0.3rem;
+        }
+        .footer-copyright {
+            font-size: 0.95rem;
+            margin-top: 0.7rem;
+            color: #eaeaea;
+            font-family: 'Roboto', Arial, sans-serif;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="nav-container">
+            <div class="logo-block">
+                <img src="image/LOGO.png" alt="Elizabeth Sagun Urban Mart Logo" class="logo-img">
+                <div class="logo-texts">
+                    <span class="logo-main">ELIZABETH</span>
+                    <span class="logo-highlight">SAGUN</span>
+                    <span class="logo-sub">URBAN MART</span>
+                </div>
+            </div>
+            <nav id="mainNav">
+                <a href="#home">Home</a>
+                <a href="#about">About</a>
+                <a href="#products">Products</a>
+                <a href="#contact">Contact</a>
+                <a href="#delivery">Delivery</a>
+                <a href="#faq">FAQ</a>
+            </nav>
+            <button class="burger" id="burgerBtn" aria-label="Menu" aria-controls="mainNav" aria-expanded="false">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </header>
+
+    <button class="floating-cart-btn" id="floatingCartBtn" title="View Cart">
+        <img src="https://img.icons8.com/ios-filled/50/091c6e/shopping-cart.png" alt="Cart" class="floating-cart-icon-img">
+        <span class="floating-cart-count" id="floatingCartCount">0</span>
+    </button>
+    <div class="overlay" id="overlay"></div>
+    <aside class="cart-section" id="cartSection">
+        <h3>Your Cart</h3>
+        <div class="cart-items" id="cartItems"></div>
+        <div class="cart-total" id="cartTotal">Total: ₱0.00</div>
+        <button class="checkout-btn" id="checkoutBtn">Checkout</button>
+    </aside>
+
+    <main>
+        <section class="home-section" id="home">
+            <h1>Welcome to Elizabeth Sagun Urban Mart</h1>
+            <h2>Quality Furniture &amp; Home Essentials – Trusted by Filipino Homes</h2>
+            <p>
+                At Elizabeth Sagun Urban Mart, we believe your home should reflect comfort, style, and functionality — all without breaking the bank.<br>
+                From durable home furnishings to elegant décor, we bring together timeless Filipino taste with modern-day convenience.<br>
+                Located at the heart of Muntinlupa, we proudly serve local families with carefully selected furniture and homeware items that are sulit, sturdy, and stylish.
+                Whether you’re decorating your first condo or upgrading your family home, we’ve got something for everyone.
+            </p>
+            <a href="#products" class="cta-btn">Browse Products</a>
+        </section>
+
+        <section class="about-section" id="about">
+            <div class="section-title">About Us</div>
+            <p><strong>Our Story</strong><br>
+            Founded in 2017, Elizabeth Sagun Urban Mart was born from a simple dream — to make stylish, quality furniture accessible to everyday Filipino families. 
+            Starting as a humble neighborhood shop in Barangay Poblacion, we've grown into a trusted source of affordable home solutions for residents of Muntinlupa and nearby areas.</p>
+            <ul>
+                <li><strong>Maaasahan</strong> – We stand by the quality and durability of our products.</li>
+                <li><strong>Malapit sa Puso</strong> – We curate items that reflect Filipino taste, tradition, and practicality.</li>
+                <li><strong>Makabago at Abot-Kaya</strong> – We blend modern trends with affordable pricing.</li>
+            </ul>
+            <p><strong>Our Mission:</strong> To help Filipino households build beautiful and comfortable living spaces by offering affordable yet premium homeware and furniture.</p>
+            <p><strong>Our Vision:</strong> To be the go-to urban mart for families seeking reliable, aesthetic, and budget-friendly home solutions in Southern Metro Manila.</p>
+        </section>
+
+        <section class="product-section" id="products">
+            <div class="section-title">Our Bestselling Categories</div>
+            <div class="product-grid">
+                <!-- Living Room Furniture -->
+                <div class="product-card">
+                    <img src="https://via.placeholder.com/140x120?text=Sofa+Set" alt="Sofa Set">
+                    <div class="product-title">Sofa Set</div>
+                    <div class="product-desc">Stylish and comfortable for family bonding.</div>
+                    <div class="product-meta">Qty: 8 | <span class="product-price">₱13,499.00</span></div>
+                    <button class="add-to-cart-btn" data-title="Sofa Set" data-price="13499.00" data-img="https://via.placeholder.com/140x120?text=Sofa+Set">Add to Cart</button>
+                </div>
+                <div class="product-card">
+                    <img src="https://via.placeholder.com/140x120?text=Coffee+Table" alt="Coffee Table">
+                    <div class="product-title">Coffee Table</div>
+                    <div class="product-desc">Minimalist &amp; sturdy centerpiece for living rooms.</div>
+                    <div class="product-meta">Qty: 14 | <span class="product-price">₱2,699.00</span></div>
+                    <button class="add-to-cart-btn" data-title="Coffee Table" data-price="2699.00" data-img="https://via.placeholder.com/140x120?text=Coffee+Table">Add to Cart</button>
+                </div>
+                <div class="product-card">
+                    <img src="https://via.placeholder.com/140x120?text=TV+Console" alt="TV Console">
+                    <div class="product-title">TV Console</div>
+                    <div class="product-desc">Modern design with ample storage options.</div>
+                    <div class="product-meta">Qty: 5 | <span class="product-price">₱4,899.00</span></div>
+                    <button class="add-to-cart-btn" data-title="TV Console" data-price="4899.00" data-img="https://via.placeholder.com/140x120?text=TV+Console">Add to Cart</button>
+                </div>
+                <!-- Bedroom Essentials -->
+                <div class="product-card">
+                    <img src="https://via.placeholder.com/140x120?text=Bed+Frame" alt="Bed Frame">
+                    <div class="product-title">Bed Frame</div>
+                    <div class="product-desc">Solid wood frame – classic comfort.</div>
+                    <div class="product-meta">Qty: 11 | <span class="product-price">₱6,599.00</span></div>
+                    <button class="add-to-cart-btn" data-title="Bed Frame" data-price="6599.00" data-img="https://via.placeholder.com/140x120?text=Bed+Frame">Add to Cart</button>
+                </div>
+                <div class="product-card">
+                    <img src="https://via.placeholder.com/140x120?text=Wardrobe" alt="Wardrobe">
+                    <div class="product-title">Wardrobe</div>
+                    <div class="product-desc">Spacious storage with modern look.</div>
+                    <div class="product-meta">Qty: 7 | <span class="product-price">₱8,199.00</span></div>
+                    <button class="add-to-cart-btn" data-title="Wardrobe" data-price="8199.00" data-img="https://via.placeholder.com/140x120?text=Wardrobe">Add to Cart</button>
+                </div>
+                <!-- Dining Area Sets -->
+                <div class="product-card">
+                    <img src="https://via.placeholder.com/140x120?text=Dining+Table+Set" alt="Dining Table Set">
+                    <div class="product-title">Dining Table Set (4-Seater)</div>
+                    <div class="product-desc">Perfect for condo or small family.</div>
+                    <div class="product-meta">Qty: 10 | <span class="product-price">₱7,899.00</span></div>
+                    <button class="add-to-cart-btn" data-title="Dining Table Set (4-Seater)" data-price="7899.00" data-img="https://via.placeholder.com/140x120?text=Dining+Table+Set">Add to Cart</button>
+                </div>
+                <div class="product-card">
+                    <img src="https://via.placeholder.com/140x120?text=Dining+Chair" alt="Dining Chair">
+                    <div class="product-title">Dining Chair</div>
+                    <div class="product-desc">Ergonomic and durable for daily use.</div>
+                    <div class="product-meta">Qty: 18 | <span class="product-price">₱1,099.00</span></div>
+                    <button class="add-to-cart-btn" data-title="Dining Chair" data-price="1099.00" data-img="https://via.placeholder.com/140x120?text=Dining+Chair">Add to Cart</button>
+                </div>
+                <!-- Homeware & Decor -->
+                <div class="product-card">
+                    <img src="https://via.placeholder.com/140x120?text=Wall+Art" alt="Wall Art">
+                    <div class="product-title">Wall Art</div>
+                    <div class="product-desc">Modern Filipino-inspired designs.</div>
+                    <div class="product-meta">Qty: 25 | <span class="product-price">₱399.00</span></div>
+                    <button class="add-to-cart-btn" data-title="Wall Art" data-price="399.00" data-img="https://via.placeholder.com/140x120?text=Wall+Art">Add to Cart</button>
+                </div>
+                <div class="product-card">
+                    <img src="https://via.placeholder.com/140x120?text=Planter" alt="Planter">
+                    <div class="product-title">Planter</div>
+                    <div class="product-desc">Add greenery and style to your home.</div>
+                    <div class="product-meta">Qty: 15 | <span class="product-price">₱299.00</span></div>
+                    <button class="add-to-cart-btn" data-title="Planter" data-price="299.00" data-img="https://via.placeholder.com/140x120?text=Planter">Add to Cart</button>
+                </div>
+            </div>
+        </section>
+
+        <section class="contact-section" id="contact">
+            <div class="section-title">Contact Us</div>
+            <div class="contact-details">
+                <strong>Visit Our Store</strong><br>
+                #32 Aglipay Street, Barangay Poblacion, City of Muntinlupa, NCR, Philippines
+                <br><br>
+                <strong>Contact Details</strong><br>
+                Phone: +63 945 890 6472<br>
+                Email: <a href="mailto:contact@elizabethsagunmart.com">contact@elizabethsagunmart.com</a><br>
+                Website: <a href="https://elizabethsagunmart.com" target="_blank">elizabethsagunmart.com</a><br>
+                <br>
+                <strong>Store Hours</strong><br>
+                Monday to Saturday: 8:00 AM – 6:00 PM<br>
+                Sundays &amp; Holidays: Closed
+                <br><br>
+                <strong>Follow Us on Social Media</strong><br>
+                <div class="social-links">
+                    <a href="https://facebook.com/ElizabethSagunMart" target="_blank">Facebook</a>
+                    <a href="https://instagram.com/elizabethsagunurbanmart" target="_blank">Instagram</a>
+                </div>
+                <br>
+                For inquiries, bulk orders, or delivery schedules, feel free to call, message, or drop by the store!
+            </div>
+        </section>
+
+        <section class="testimonial-section" id="testimonials">
+            <div class="section-title">Testimonials</div>
+            <div class="testimonial-list">
+                <div class="testimonial">
+                    “Super sulit ang sofa set namin! Matibay at maganda ang quality. Mabait pa ang staff.”
+                    <span class="testimonial-author">– Mariel D., Alabang</span>
+                </div>
+                <div class="testimonial">
+                    “They helped us furnish our new condo. Lahat ng items maayos and delivered on time.”
+                    <span class="testimonial-author">– James R., Las Piñas</span>
+                </div>
+                <div class="testimonial">
+                    “Ang ganda ng mga dining sets nila! Affordable pero classy. Recommended talaga.”
+                    <span class="testimonial-author">– Lynette V., Taguig</span>
+                </div>
+            </div>
+        </section>
+
+        <section class="faq-section" id="faq">
+            <div class="section-title">Frequently Asked Questions</div>
+            <ul class="faq-list">
+                <li>
+                    <div class="faq-q">Do you accept GCash or card payments?</div>
+                    <div class="faq-a">Yes! We accept GCash, bank transfers, and major credit/debit cards.</div>
+                </li>
+                <li>
+                    <div class="faq-q">Do you offer same-day delivery?</div>
+                    <div class="faq-a">Same-day delivery is available within Muntinlupa for selected items. Please contact us to confirm.</div>
+                </li>
+                <li>
+                    <div class="faq-q">Can I request custom furniture sizes?</div>
+                    <div class="faq-a">Yes, custom-made furniture orders are available upon request. Lead time is 7–14 working days.</div>
+                </li>
+                <li>
+                    <div class="faq-q">Do you accept returns or exchanges?</div>
+                    <div class="faq-a">Items can be returned within 7 days if defective, with original receipt and packaging. Terms apply.</div>
+                </li>
+            </ul>
+        </section>
+
+        <section class="delivery-section" id="delivery">
+            <div class="section-title">Delivery &amp; Shipping</div>
+            <div class="delivery-details">
+                <strong>We deliver to all cities in Metro Manila and selected areas in CALABARZON.</strong><br>
+                Standard Delivery Fee: ₱300–₱800 depending on location.<br>
+                Assembly Service: Optional add-on available upon request.<br>
+                Delivery Schedule: Monday to Saturday, 9:00 AM – 5:00 PM<br>
+                <br>
+                To schedule a delivery, please call <a href="tel:+639458906472">+63 945 890 6472</a> or email <a href="mailto:contact@elizabethsagunmart.com">contact@elizabethsagunmart.com</a>.
+            </div>
+        </section>
+
+        <section class="legitimacy-section" id="legitimacy">
+            <div class="section-title">Business Legitimacy</div>
+            <div class="legitimacy-details">
+                DTI Registered Business Name: <strong>Elizabeth Sagun Urban Mart</strong><br>
+                VAT Registration No.: 490-874-235-000<br>
+                Mayor’s Permit: City of Muntinlupa, Permit #2025-1342-UHM<br>
+                TIN: 008-542-689-000<br>
+                <br>
+                We operate as a fully licensed business in compliance with Philippine regulations.
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-links">
+            <a href="privacy-policy.html">Privacy Policy</a>
+            <a href="terms.html">Terms of Service</a>
+            <a href="refund-policy.html">Refund Policy</a>
+        </div>
+        <div class="footer-address">
+            #32 Aglipay Street, Barangay Poblacion, City of Muntinlupa, NCR, Philippines
+        </div>
+        <div class="footer-contact">
+            Phone: +63 945 890 6472 | Email: contact@elizabethsagunmart.com
+        </div>
+        <div class="footer-copyright">
+            &copy; 2025 Elizabeth Sagun Urban Mart. All rights reserved.
+        </div>
+    </footer>
+
+    <script>
+        // Burger button & mobile nav
+        const burgerBtn = document.getElementById('burgerBtn');
+        const nav = document.getElementById('mainNav');
+        burgerBtn.addEventListener('click', function() {
+            burgerBtn.classList.toggle('active');
+            nav.classList.toggle('active');
+            burgerBtn.setAttribute('aria-expanded', nav.classList.contains('active'));
+        });
+        Array.from(nav.querySelectorAll('a')).forEach(function(link) {
+            link.addEventListener('click', function() {
+                if (window.innerWidth <= 900) {
+                    burgerBtn.classList.remove('active');
+                    nav.classList.remove('active');
+                    burgerBtn.setAttribute('aria-expanded', 'false');
+                }
+            });
+        });
+
+        // Cart functionality
+        const floatingCartBtn = document.getElementById('floatingCartBtn');
+        const floatingCartCount = document.getElementById('floatingCartCount');
+        const cartSection = document.getElementById('cartSection');
+        const overlay = document.getElementById('overlay');
+        const cartItemsEl = document.getElementById('cartItems');
+        const cartTotalEl = document.getElementById('cartTotal');
+        const checkoutBtn = document.getElementById('checkoutBtn');
+        let cart = [];
+
+        function openCart() {
+            cartSection.classList.add('open');
+            overlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+            renderCart();
+        }
+
+        function closeCart() {
+            cartSection.classList.remove('open');
+            overlay.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        floatingCartBtn.addEventListener('click', openCart);
+        overlay.addEventListener('click', closeCart);
+
+        function addToCart(title, price, img) {
+            const exist = cart.find(item => item.title === title);
+            if (exist) {
+                exist.qty += 1;
+            } else {
+                cart.push({ title, price: parseFloat(price), img, qty: 1 });
+            }
+            updateCartCount();
+            renderCart();
+        }
+
+        function removeFromCart(index) {
+            cart.splice(index, 1);
+            updateCartCount();
+            renderCart();
+        }
+
+        function updateCartCount() {
+            const totalQty = cart.reduce((sum, item) => sum + item.qty, 0);
+            floatingCartCount.textContent = totalQty;
+        }
+
+        function renderCart() {
+            cartItemsEl.innerHTML = '';
+            let total = 0;
+            cart.forEach((item, idx) => {
+                total += item.price * item.qty;
+                const el = document.createElement('div');
+                el.className = 'cart-item';
+                el.innerHTML = `
+                    <img src="${item.img}" alt="${item.title}">
+                    <div class="cart-item-details">
+                        <div class="cart-item-title">${item.title}</div>
+                        <div class="cart-item-qty">Qty: ${item.qty}</div>
+                        <div class="cart-item-price">₱${(item.price * item.qty).toLocaleString(undefined, {minimumFractionDigits:2})}</div>
+                    </div>
+                    <button class="remove-cart-btn" title="Remove" onclick="removeFromCart(${idx})">&times;</button>
+                `;
+                cartItemsEl.appendChild(el);
+            });
+            cartTotalEl.textContent = `Total: ₱${total.toLocaleString(undefined, {minimumFractionDigits:2})}`;
+        }
+
+        document.querySelectorAll('.add-to-cart-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                addToCart(this.dataset.title, this.dataset.price, this.dataset.img);
+            });
+        });
+
+        checkoutBtn.addEventListener('click', function() {
+            window.location.href = "order-summary.html";
+        });
+
+        // For removing cart items (global function for inline onclick)
+        window.removeFromCart = removeFromCart;
+
+        // Accessibility: Close cart with Esc key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && cartSection.classList.contains('open')) {
+                closeCart();
+            }
+        });
+
+        // Sticky header shadow on scroll
+        window.addEventListener('scroll', function() {
+            var header = document.querySelector('header');
+            if (window.scrollY > 20) {
+                header.style.boxShadow = '0 4px 16px rgba(9,28,110,0.13)';
+            } else {
+                header.style.boxShadow = '0 2px 8px rgba(60,60,60,0.07)';
+            }
+        });
+    </script>
+</body>
+</html>
