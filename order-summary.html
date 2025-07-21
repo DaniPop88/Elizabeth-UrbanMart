@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Summary | Elizabeth Sagun Urban Mart</title>
+    <meta name="description" content="Order summary and checkout for Elizabeth Sagun Urban Mart. Review your purchase and securely complete your payment.">
+    <link rel="icon" type="image/png" href="image/FAVICON.png">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:900,700,400|Roboto:400,500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --navy: #091c6e;
+            --magenta: #ff2380;
+            --gray: #f4f4f4;
+            --white: #fff;
+            --primary: var(--navy);
+            --accent: var(--magenta);
+            --body-bg: var(--gray);
+            --header-bg: var(--white);
+            --footer-bg: var(--primary);
+            --footer-text: var(--gray);
+            --shadow: 0 2px 8px rgba(60,60,60,0.07);
+            --max-width: 600px;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            background: var(--body-bg);
+            font-family: 'Roboto', Arial, sans-serif;
+            color: #222c3c;
+            line-height: 1.6;
+        }
+        header {
+            background: var(--header-bg);
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            width: 100%;
+            z-index: 999;
+        }
+        .header-container {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            padding: 1rem 1rem 0.8rem 1rem;
+        }
+        .logo-img {
+            height: 53px;
+            width: 53px;
+            margin-right: 1rem;
+            object-fit: contain;
+            border-radius: 10px;
+        }
+        .logo-block {
+            display: flex;
+            align-items: center;
+        }
+        .logo-texts {
+            display: flex;
+            flex-direction: column;
+        }
+        .logo-main {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 900;
+            font-size: 1.25rem;
+            color: var(--primary);
+            line-height: 1;
+        }
+        .logo-highlight {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 900;
+            font-size: 1.25rem;
+            color: var(--accent);
+            line-height: 1;
+        }
+        .logo-sub {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 400;
+            font-size: 0.95rem;
+            color: var(--primary);
+            letter-spacing: 1px;
+            margin-top: 2px;
+        }
+        main {
+            max-width: var(--max-width);
+            margin: 2rem auto 0 auto;
+            background: var(--white);
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            padding: 2rem 1.2rem 2rem 1.2rem;
+        }
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.5rem;
+            color: var(--primary);
+            font-weight: 900;
+            margin-bottom: 0.5rem;
+            letter-spacing: 1px;
+            text-align: center;
+        }
+        .section-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.17rem;
+            color: var(--primary);
+            font-weight: 900;
+            letter-spacing: 1px;
+            margin-top: 1.7rem;
+            margin-bottom: 0.8rem;
+            text-align: left;
+        }
+        .order-summary {
+            background: #f7f7f7;
+            border-radius: 9px;
+            padding: 1rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 1px 4px rgba(9,28,110,0.04);
+        }
+        .order-summary-list {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+        .order-summary-list li {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.7rem 0;
+            border-bottom: 1px solid #eaeaea;
+            font-size: 1rem;
+            color: #222c3c;
+        }
+        .order-summary-list li:last-child {
+            border-bottom: none;
+        }
+        .order-total {
+            font-weight: 900;
+            color: var(--accent);
+            font-size: 1.09rem;
+        }
+        .customer-info {
+            margin-bottom: 1.2rem;
+        }
+        .customer-info label {
+            font-size: 1rem;
+            color: var(--primary);
+            font-weight: 700;
+            margin-bottom: 3px;
+        }
+        .customer-info input, .customer-info select, .customer-info textarea {
+            width: 100%;
+            padding: 0.7rem;
+            margin-bottom: 0.9rem;
+            border-radius: 7px;
+            border: 1px solid #e6e6e6;
+            font-size: 1rem;
+            font-family: 'Roboto', Arial, sans-serif;
+        }
+        .customer-info textarea {
+            min-height: 54px;
+        }
+        .checkout-btn {
+            display: block;
+            width: 100%;
+            background: var(--accent);
+            color: var(--white);
+            padding: 0.9rem 0;
+            border-radius: 24px;
+            font-weight: 900;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.15rem;
+            border: none;
+            box-shadow: var(--shadow);
+            letter-spacing: 1px;
+            cursor: pointer;
+            margin: 2rem 0 0.5rem 0;
+            transition: background 0.2s, color 0.2s;
+        }
+        .checkout-btn:hover {
+            background: var(--primary);
+            color: var(--accent);
+        }
+        .info-note {
+            background: #fffbec;
+            border-left: 6px solid var(--accent);
+            color: #222c3c;
+            font-size: 1rem;
+            padding: 0.9rem 1.1rem;
+            margin-bottom: 1.2rem;
+            border-radius: 7px;
+            box-shadow: 0 1px 4px rgba(9,28,110,0.03);
+        }
+        .confirmation-modal {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            background: rgba(9,28,110,0.16);
+            z-index: 1200;
+            align-items: center;
+            justify-content: center;
+        }
+        .confirmation-content {
+            background: var(--white);
+            border-radius: 12px;
+            max-width: 95vw;
+            width: 420px;
+            padding: 2.2rem 1.5rem;
+            box-shadow: 0 5px 32px rgba(9,28,110,0.11);
+            text-align: center;
+            position: relative;
+        }
+        .confirmation-content h2 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.25rem;
+            color: var(--primary);
+            font-weight: 900;
+            margin-bottom: 0.9rem;
+            letter-spacing: 1px;
+        }
+        .confirmation-content p {
+            font-size: 1.05rem;
+            margin-bottom: 1.25rem;
+        }
+        .confirmation-content .close-btn {
+            background: var(--accent);
+            color: var(--white);
+            border: none;
+            border-radius: 22px;
+            padding: 0.6rem 1.7rem;
+            font-size: 1.05rem;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 900;
+            cursor: pointer;
+            transition: background 0.2s, color 0.2s;
+        }
+        .confirmation-content .close-btn:hover {
+            background: var(--primary);
+            color: var(--accent);
+        }
+        @media (max-width: 600px) {
+            main {
+                padding: 1.1rem 0.3rem 1.2rem 0.3rem;
+            }
+            .header-container {
+                padding: 0.7rem 0.4rem 0.5rem 0.4rem;
+            }
+            .confirmation-content {
+                padding: 1.2rem 0.6rem;
+            }
+        }
+        footer {
+            background: var(--footer-bg);
+            color: var(--footer-text);
+            padding: 1.2rem 0 1rem 0;
+            text-align: center;
+            margin-top: 2rem;
+        }
+        .footer-links {
+            margin-bottom: 1rem;
+        }
+        .footer-links a {
+            color: var(--accent);
+            text-decoration: underline;
+            margin: 0 0.9rem;
+            font-size: 1rem;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            transition: color 0.2s;
+        }
+        .footer-links a:hover {
+            color: #fff;
+        }
+        .footer-address {
+            font-size: 1.02rem;
+            margin-bottom: 0.3rem;
+        }
+        .footer-contact {
+            font-size: 1.02rem;
+            margin-bottom: 0.3rem;
+        }
+        .footer-copyright {
+            font-size: 0.95rem;
+            margin-top: 0.7rem;
+            color: #eaeaea;
+            font-family: 'Roboto', Arial, sans-serif;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <div class="logo-block">
+                <img src="image/LOGO.png" alt="Elizabeth Sagun Urban Mart Logo" class="logo-img">
+                <div class="logo-texts">
+                    <span class="logo-main">ELIZABETH</span>
+                    <span class="logo-highlight">SAGUN</span>
+                    <span class="logo-sub">URBAN MART</span>
+                </div>
+            </div>
+        </div>
+    </header>
+    <main>
+        <h1>Order Review &amp; Checkout</h1>
+        <div class="info-note">
+            Thank you for choosing Elizabeth Sagun Urban Mart! Please review your order below and provide your contact details to proceed with checkout.<br>
+            Once submitted, our team will connect with you to confirm your product choices, availability, and finalize the order before sending a payment link.
+        </div>
+        <div class="section-title">Your Selected Items</div>
+        <div class="order-summary" id="orderSummarySection">
+            <ul class="order-summary-list" id="orderSummaryList">
+                <!-- Example items, these should be dynamically generated in integration -->
+                <li>
+                    <span>Sofa Set (Navy Blue)</span>
+                    <span>₱13,499.00</span>
+                </li>
+                <li>
+                    <span>Dining Table (4-Seater)</span>
+                    <span>₱7,899.00</span>
+                </li>
+                <li>
+                    <span>Wall Art</span>
+                    <span>₱399.00</span>
+                </li>
+                <li class="order-total">
+                    <span>Total</span>
+                    <span>₱21,797.00</span>
+                </li>
+            </ul>
+        </div>
+        <div class="section-title">Contact &amp; Delivery Details</div>
+        <form id="checkoutForm" autocomplete="off">
+            <div class="customer-info">
+                <label for="customerName">Full Name</label>
+                <input type="text" id="customerName" name="customerName" required placeholder="Enter your name">
+                <label for="customerPhone">Mobile Number</label>
+                <input type="tel" id="customerPhone" name="customerPhone" required placeholder="e.g. +63 912 345 6789">
+                <label for="customerEmail">Email Address</label>
+                <input type="email" id="customerEmail" name="customerEmail" required placeholder="e.g. you@email.com">
+                <label for="customerAddress">Delivery Address</label>
+                <textarea id="customerAddress" name="customerAddress" required placeholder="Complete delivery address"></textarea>
+                <label for="deliveryDate">Preferred Delivery Date</label>
+                <input type="date" id="deliveryDate" name="deliveryDate" required>
+                <label for="paymentMethod">Payment Method</label>
+                <select id="paymentMethod" name="paymentMethod" required>
+                    <option value="">Select payment method</option>
+                    <option value="GCash">GCash</option>
+                    <option value="Bank Transfer">Bank Transfer</option>
+                    <option value="Credit/Debit Card">Credit/Debit Card</option>
+                    <option value="Cash on Delivery">Cash on Delivery</option>
+                </select>
+                <label for="orderNotes">Additional Notes</label>
+                <textarea id="orderNotes" name="orderNotes" placeholder="Any special requests or instructions"></textarea>
+            </div>
+            <button type="submit" class="checkout-btn">Submit Order</button>
+        </form>
+    </main>
+    <div class="confirmation-modal" id="confirmationModal">
+        <div class="confirmation-content">
+            <h2>Order Submitted Successfully!</h2>
+            <p>
+                Thank you for your order.<br>
+                One of our team members will contact you soon to verify product selections, confirm colors, availability, and finalize your order details.<br>
+                Once you confirm, we’ll send a secure payment link based on your selected payment method.<br>
+                <strong>Please complete your payment within 24 hours</strong> to prevent automatic cancellation.<br>
+                We appreciate your prompt response and look forward to helping you make your home more beautiful!
+            </p>
+            <button class="close-btn" id="closeConfirmationBtn">Close</button>
+        </div>
+    </div>
+    <footer>
+        <div class="footer-links">
+            <a href="privacy-policy.html">Privacy Policy</a>
+            <a href="terms.html">Terms of Service</a>
+            <a href="refund-policy.html">Refund Policy</a>
+        </div>
+        <div class="footer-address">
+            #32 Aglipay Street, Barangay Poblacion, City of Muntinlupa, NCR, Philippines
+        </div>
+        <div class="footer-contact">
+            Phone: +63 945 890 6472 | Email: contact@elizabethsagunmart.com
+        </div>
+        <div class="footer-copyright">
+            &copy; 2025 Elizabeth Sagun Urban Mart. All rights reserved.
+        </div>
+    </footer>
+    <script>
+        // Responsive mobile touch: scroll to top when modal opens
+        function showConfirmationModal() {
+            document.getElementById('confirmationModal').style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+        function hideConfirmationModal() {
+            document.getElementById('confirmationModal').style.display = 'none';
+            document.body.style.overflow = '';
+        }
+        document.getElementById('closeConfirmationBtn').addEventListener('click', hideConfirmationModal);
+
+        // Handle checkout form submission
+        document.getElementById('checkoutForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            showConfirmationModal();
+        });
+
+        // Accessibility: Allow closing modal with Esc key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && document.getElementById('confirmationModal').style.display === 'flex') {
+                hideConfirmationModal();
+            }
+        });
+
+        // Sticky header shadow on scroll
+        window.addEventListener('scroll', function() {
+            var header = document.querySelector('header');
+            if (window.scrollY > 20) {
+                header.style.boxShadow = '0 4px 16px rgba(9,28,110,0.13)';
+            } else {
+                header.style.boxShadow = '0 2px 8px rgba(60,60,60,0.07)';
+            }
+        });
+    </script>
+</body>
+</html>
