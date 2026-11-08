@@ -98,3 +98,21 @@ footer { background: var(--walnut-deep); border-radius: 1.8rem 1.8rem 0 0; }
   .home-section { border-radius: 1.4rem; }
 }
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } * { transition: none !important; } }
+
+/* === Layout pass 2026-11-07: centered hero, full product photos, contact cards === */
+html, body { overflow-x: clip; }
+.home-section { text-align: center; }
+.home-section p { max-width: 64ch; margin-left: auto !important; margin-right: auto !important; }
+/* Products: photo fills the card top */
+.product-card { display: flex !important; flex-direction: column; padding: 0 0 1.2rem !important; text-align: center; }
+.product-card img { width: 100% !important; max-width: none !important; height: auto !important; aspect-ratio: 4 / 3; object-fit: cover !important; padding: 0 !important; border-radius: 0 !important; margin: 0 0 .9rem !important; background: var(--parchment) !important; }
+.product-card img[src^="data:"] { object-fit: contain !important; padding: 2.2rem !important; }
+.product-card .add-to-cart-btn { margin-top: auto !important; }
+/* Contact cards */
+.contact-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: .9rem; text-align: left; line-height: 1.7; }
+.contact-card { background: rgba(255,255,255,.06); border-left: 4px solid var(--clay); border-radius: 0 .9rem .9rem 0; padding: 1rem 1.2rem; overflow-wrap: anywhere; }
+.contact-card.wide { grid-column: 1 / -1; }
+.contact-card strong { display: block; font-size: .78rem; letter-spacing: .08em; text-transform: uppercase; margin-bottom: .25rem; }
+.contact-card .social-links { display: flex; gap: 1rem; margin: 0; }
+.contact-note { grid-column: 1 / -1; margin: .4rem 0 0; }
+@media (max-width: 800px) { .contact-grid { grid-template-columns: 1fr; } }
